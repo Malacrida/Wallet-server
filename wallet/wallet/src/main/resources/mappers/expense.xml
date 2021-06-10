@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wallet.mapper.ExpenseMapper">
+
+	<resultMap type="com.wallet.model.Expense" id="ExpenseResult">
+		<id column="id" property="id" />
+		<result column="amount" property="amount" />
+		<result column="description" property="description" />
+		<result column="date" property="date" />
+	</resultMap>
+	
+	<select id="findExpense" resultMap="ExpenseResult">
+		SELECT *
+		FROM expense
+		ORDER BY date
+	</select>
+	
+	<insert id="insertExpense">
+		INSERT INTO expense(
+			id,
+			amount,
+			description,
+			date
+		) VALUES (
+			#{id},
+			#{amount},
+			#{description},
+			#{date}
+		)
+	</insert>
+	
+	<delete id="deleteExpense">
+		DELETE FROM expense
+		WHERE id = #{id}
+	</delete>
+</mapper>
